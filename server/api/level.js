@@ -16,7 +16,7 @@ var getReq = function() {
   };
 };
   
-function Level(email, password, cb, mock) {
+Level = function Level(email, password, cb, mock) {
   cb = cb || function() {/* noop */};
   this.user = {};
 
@@ -33,7 +33,9 @@ function Level(email, password, cb, mock) {
       this.user.uuid = 1110568334;
       this.user.token = '1CA902A8E5D74EDBB0701B8DA5A79DB6';
     }
-    cb();
+    // Ensure the instance is instantiated before reporting success
+    // FIXME: Do not delegate to login
+    setTimeout(Meteor.bindEnvironment(cb));
   }
 }
 
