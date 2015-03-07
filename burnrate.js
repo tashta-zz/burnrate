@@ -14,6 +14,10 @@ if (Meteor.isClient) {
       Session.set('counter', Session.get('counter') + 1);
     }
   });
+
+  Template.hello.rendered = function(){
+    // Add d3 code here.
+  };
 }
 
 if (Meteor.isServer) {
