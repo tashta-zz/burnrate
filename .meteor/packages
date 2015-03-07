@@ -7,9 +7,10 @@
 meteor-platform
 autopublish
 insecure
+http
 mquandalle:jade
 momentjs:moment
 ewall:foundation
 d3js:d3
-nvd3:nvd3
-http
+peernohell:c3
+erasaur:meteor-lodash
