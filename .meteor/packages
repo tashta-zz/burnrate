@@ -7,5 +7,8 @@
 meteor-platform
 autopublish
 insecure
-matthew:foundation5-sass
 mquandalle:jade
+momentjs:moment
+ewall:foundation
+d3js:d3
+nvd3:nvd3
