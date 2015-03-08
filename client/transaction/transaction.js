@@ -1,11 +1,14 @@
 Template.transactions.helpers({
   transactions: function(){
     var transactionDate = Session.get("transactionDate");
+    var account = Session.get('activeAccount') || 'all-accounts';
     var day = getDay(transactionDate);
-    if ((day !== undefined) && (day.length > 0)){
-      var activeAccount = Session.get("activeAccount") || 'all-accounts';
-      var dayAccount = day[0][activeAccount];
-      return dayAccount.txs || [];
+    var txs = getTxs(day);
+    if (account === 'all-accounts') { return txs; }
+    else {
+      return txs.filter(function(tx) {
+        return tx.account === account;
+      });
     }
   },
 
