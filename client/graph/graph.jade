@@ -1,7 +1,2 @@
 template(name="graph")
-  h4
-    | Line Chart - small #[a(href='http://bl.ocks.org/mbostock/3883245') View Original]
-  svg(id="past_graph")
-  input.button#add(type='button', value='Add a Value')
-  input.button#remove(type='button', value='Remove a Value')
-  input.button.warning#randomize(type='button', value='Randomize Values')
+  div(id=graph_id, style="max-width:100vw;max-height:40vh;")
