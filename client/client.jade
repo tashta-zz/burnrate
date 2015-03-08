@@ -2,11 +2,17 @@ head
   title burnrate
 
 body
-  if currentuser
+  .page-container
+    +main
+
+template(name='main')
+  if currentUser
     +navbar
     +accounts
     +graph(graph_id="past_graph")
     +graph(graph_id="future_graph")
     +transactions
+  else if isLoggingIn
+    div loading...
   else
     +login
