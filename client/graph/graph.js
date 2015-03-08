@@ -104,7 +104,7 @@ Template.graph.events({
 });
 
 Template.graph.rendered = function(){
-
+  // To be replaced by Zach's function
   function transform(oldData){
     var newData = [];
     newData.push(['date']);
@@ -119,10 +119,22 @@ Template.graph.rendered = function(){
     });
     return newData;
   }
+
+  function showTransactions(d){
+    // Find the matching data by date and account selection
+    // Display in transaction template
+    console.log(d,_.find( tempdata, function(datum){
+      if(d.x == datum._date){
+        return true;
+      }
+    }));
+  }
+
   var chart = c3.generate({
     bindto: "#"+this.data.graph_id,
     data: {
       //Will be something like tempdata form
+      onmouseover: showTransactions,
       x: 'date',
       xFormate: '%Y%m%d',
       columns: transform(tempdata)
