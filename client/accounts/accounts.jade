@@ -1,0 +1,5 @@
+template(name='accounts')
+  form
+    each accounts
+      input.js-account(type="radio" name="account" value=this checked=isTypeSelected)
+      label(for="account") #{this}
