@@ -16,7 +16,8 @@ Meteor.methods({ txs: function(email, password, mock) {
         return {
           id: account['account-id'],
           name: account['account-name'],
-          balance: account.balance
+          // Convert from centocents -> dollars
+          balance: account.balance / 10000,
         };
       });
       var accountMap = accounts.reduce(function(map, account) {
@@ -45,10 +46,12 @@ Meteor.methods({ txs: function(email, password, mock) {
       data['+txs'].forEach(function(tx) { modifyDay(tx); });
         
       function modifyDay(tx) {
-        var amount = tx.amount;
+        // Convert from centocents -> dollars
+        var amount = tx.amount / 10000;
         var type = amount > 0 ? 'credit' : 'debit';
         var account = accountMap[tx['account-id']];
         var day = getDay(tx);
+        amount = Math.abs(amount);
 
         day['all-accounts'].txs.push(tx);
         day['all-accounts'].balance = totalBalance += amount;
@@ -60,6 +63,7 @@ Meteor.methods({ txs: function(email, password, mock) {
         // TODO: Calculate day from client's timezone
         var time = tx['transaction-time'].slice(0, 10);
         var day = days[time] = days[time] || {
+          // TODO: Add a uuid
           '_date': new Date(time),
           'all-accounts': {
             balance: totalBalance,
@@ -80,7 +84,7 @@ Meteor.methods({ txs: function(email, password, mock) {
 
       // Update the collection
       txs.remove({});
-      for (var day in days) { txs.insert(days[day]); }
+      for (var ix in days) { txs.insert(days[ix]); }
 
       cb(null);
     }
