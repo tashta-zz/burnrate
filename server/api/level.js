@@ -72,7 +72,8 @@ Level.prototype.get = function(startDate, endDate, cb) {
   // Default range EPOCH-+1YEAR
   if (!endDate) {
    endDate = new Date();
-   endDate.setYear(endDate.getFullYear());
+   // Default to one-year-from-hence projections
+   endDate.setYear(endDate.getFullYear() + 1);
   }
 
   var today = new Date();
@@ -96,7 +97,7 @@ Level.prototype.get = function(startDate, endDate, cb) {
   ), calls++;
 
   // Get all predicted txs between now and endDate
-  while (year <= endYear && month <= endMonth) {
+  while (year < endYear || (year === endYear && month <= endMonth)) {
     var req = getReq.call(this);
     req.data.year = year;
     req.data.month = month;
