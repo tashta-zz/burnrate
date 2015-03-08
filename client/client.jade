@@ -11,9 +11,12 @@ template(name='main')
     +navbar
     +whatIf
     +accounts
-    .graph-header Past
+    .graph-header.past Past Month
     +graph(graph_id="past_graph")
-    .graph-header Future
+    div.graph-future
+      a.graph-date-scroll.left &#10094;
+      span.graph-header.future
+      a.graph-date-scroll.right &#10095;
     +graph(graph_id="future_graph")
     +transactions
   else if isLoggingIn

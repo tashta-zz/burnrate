@@ -19,10 +19,25 @@ Template.graph.rendered = function(){
     if(self.data.graph_id == "past_graph"){
       data = getDayRange(null, new Date());
     }else{
+      var date = Session.get('graphDate');
+      var startDate = moment();
+      var endDate = moment().add(1, 'month');
+
+      if (date) {
+        startDate.add(date, 'month');
+        endDate.add(date, 'month');
+        $('.graph-header.future').text(date + ' Months from Now');
+      } else {
+        $('.graph-header.future').text('Next Month');
+      }
+
+      startDate = new Date(startDate);
+      endDate = new Date(endDate);
+
       data = mockTransactions ?
         // Ask a what-if?
-        mockDayRange(mockTransactions, new Date(), null) :
-        getDayRange(new Date(), null);
+        mockDayRange(mockTransactions, startDate, endDate) :
+        getDayRange(startDate, endDate);
     }
 
     data = getGraphTransform(data);
