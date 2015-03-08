@@ -4,7 +4,6 @@ Template.graph.events({
 
 Template.graph.rendered = function(){
   var self = this;
-  // To be replaced by Zach's function
 
   function showTransactions(d){
     // Find the matching data by date and account selection
@@ -30,7 +29,6 @@ Template.graph.rendered = function(){
     var graph_config = {
       bindto: "#"+self.data.graph_id,
       data: {
-        //Will be something like tempdata form
         onmouseover: showTransactions,
         x: 'date',
         columns: data['all-accounts'],
