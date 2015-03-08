@@ -1,5 +1,5 @@
 template(name='accounts')
-  form
+  #accounts-picker
     each accounts
       input.js-account(type="radio" name="account" value=this checked=isTypeSelected)
-      label(for="account") #{this}
+      label(for="account") #{displayName}

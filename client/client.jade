@@ -9,7 +9,9 @@ template(name='main')
   if currentUser
     +navbar
     +accounts
+    .graph-header Past
     +graph(graph_id="past_graph")
+    .graph-header Future
     +graph(graph_id="future_graph")
     +transactions
   else if isLoggingIn
