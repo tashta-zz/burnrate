@@ -19,11 +19,10 @@ Template.graph.rendered = function(){
     if(self.data.graph_id == "past_graph"){
       data = getDayRange(null, new Date());
     }else{
-      data = getDayRange(new Date(), null);
-    }
-
-    if((self.data.graph_id == "future_graph") && (mockTransaction !== undefined)){
-      data = mockDayRange([mockTransaction], new Date(), null);
+      data = mockTransaction ?
+        // Ask a what-if?
+        mockDayRange([mockTransaction], new Date(), null) :
+        getDayRange(new Date(), null);
     }
 
     data = getGraphTransform(data);
