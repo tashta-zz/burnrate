@@ -7,7 +7,7 @@ Template.graph.rendered = function(){
       return;
     }
     var activeAccount = Session.get('activeAccount');
-    var mockTransaction = Session.get('mockTransaction');
+    var mockTransactions = Session.get('mockTxs');
 
     function showTransactions(d){
       //d.x because x is the date object
@@ -19,9 +19,9 @@ Template.graph.rendered = function(){
     if(self.data.graph_id == "past_graph"){
       data = getDayRange(null, new Date());
     }else{
-      data = mockTransaction ?
+      data = mockTransactions ?
         // Ask a what-if?
-        mockDayRange([mockTransaction], new Date(), null) :
+        mockDayRange(mockTransactions, new Date(), null) :
         getDayRange(new Date(), null);
     }
 
