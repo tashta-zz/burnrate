@@ -1,11 +1,21 @@
-getDayRange = function(startDate, endDate) {
+parseDateRange = function(startDate, endDate) {
   if (!startDate) { startDate = moment().subtract(1, 'month'); }
   if (!endDate) { endDate = moment().add(1, 'month'); }
   startDate = new Date(moment(startDate).startOf('day'));
   endDate = new Date(moment(endDate).endOf('day'));
 
-  return txs.find({_date: {$gte: startDate, $lte: endDate}})
-    .fetch();
+  return [startDate, endDate];
+};
+
+getDayRange = function(startDate, endDate) {
+  var dates = parseDateRange(startDate, endDate);
+
+  return txs.find({_date: {$gte: dates[0], $lte: dates[1]}})
+    .fetch()
+    .sort(function(a, b) {
+      return new Date(a._date) < new Date(b._date) ? -1 : 1;
+    });
+
 };
 
 getDay = function(date) {
@@ -13,7 +23,7 @@ getDay = function(date) {
   return getDayRange(date, date);
 };
 
-getTx = function(dayRange) {
+getTxs = function(dayRange) {
   if (!dayRange.length) { return []; }
 
   return dayRange
