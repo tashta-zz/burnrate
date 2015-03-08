@@ -1,6 +1,16 @@
 template(name='whatIf')
   div#what-if
-    | Can I spend $
-    input#amount
-    ='?'
+    div
+      span
+        | What if I spend $
+        input#debit-amount(placeholder="0")
+        ='?'
+      span
+        | What if I earn $
+        input#credit-amount(placeholder="0")
+        ='?'
+    div
+      span
+        | When will you be spending/earning?
+        input#what-if-date(type="date",value="2015-03-09")
     button#check Check
