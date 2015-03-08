@@ -1,0 +1,9 @@
+template(name='navbar')
+  #navbar
+    with currentUser.profile
+      div
+        img(src=thumbnailUrl)
+      div
+        div #{firstName}
+        div
+          a#logout Log Out
