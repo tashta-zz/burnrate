@@ -5,7 +5,7 @@ Template.whatIf.events({
    
     var creditAmount = +$('#credit-amount').val();
     var debitAmount = -+$('#debit-amount').val();
-    var date = new Date($('#what-if-date').val()) || new Date();
+    var date = new Date(+(new Date($('#what-if-date').val())) + 1000 * 60 * 60 * 24) || new Date();
 
     var mockTxs = [];
     if (creditAmount) {
