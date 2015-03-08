@@ -13,6 +13,7 @@ mockTx = function makeTx(amount, account, time) {
     // Convert dollars -> centocents
     amount: amount * 10000,
     account: account,
+    // Mitigate timezone changing date
     'transaction-time': new Date(time).toISOString(),
   };
 };
@@ -20,8 +21,7 @@ mockTx = function makeTx(amount, account, time) {
 mockReTx = function makeReTx(amount, account, days) {
   return {
     recurring: true,
-    // Convert dollars -> centocents
-    amount: amount * 10000,
+    amount: amount,
     account: account,
     days: days,
   };
@@ -41,16 +41,19 @@ mockDayRange = function transform(txs, startDate, endDate) {
   txs = txs.concat(getTxs(realDays.slice(1)));
 
   // Use the date from our dayRange to start, as we don't know the actual last value
-  var date = moment(firstDay._date);
+  var date = startDate ? moment(startDate).startOf('day') : moment(firstDay._date);
 
   // Create mock recurring txs
-  while (date < dates[1]) {
+  while (date <= dates[1]) {
     var currentDay = dayMap[date.day()];
     var currentDate = date.date();
 
     reTxs.forEach(function(reTx) {
-      if (!~reTx.days.indexOf(currentDay) || !~reTx.days.indexOf(currentDate)) {
-        txs.push(mockTx(reTx.amount, date, reTx.account));
+      if (reTx.days[currentDay] || reTx.days[currentDate]) {
+        var mock = mockTx(reTx.amount, reTx.account, date);
+
+        if (date <= date[0]) { firstTxs.push(mock); }
+        else { txs.push(mock); }
       }
     });
 
@@ -76,7 +79,6 @@ mockDayRange = function transform(txs, startDate, endDate) {
   var day;
   for (var ix in daysMap) {
     day = daysMap[ix]
-    day._date = new Date(ix);
     days.push(day);
   }
 
