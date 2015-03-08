@@ -5,7 +5,7 @@ Template.graph.rendered = function(){
 
     function showTransactions(d){
       //d.x because x is the date object
-      Session.set('transactionDate', d.x)
+      Session.set('transactionDate', d.x);
     }
     // Hard coded in a mock account here
     // Should replace with username and password ideally
@@ -24,7 +24,7 @@ Template.graph.rendered = function(){
       }
 
       data = getGraphTransform(data);
-      console.log("active account data", data[activeAccount]);
+      // console.log("active account data", data[activeAccount]);
       var graph_config = {
         bindto: "#"+self.data.graph_id,
         data: {

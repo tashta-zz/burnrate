@@ -1,5 +1,18 @@
 template(name="transactions")
-  table
-    each transactions
+  if transactions
+    table#transactions-table
       tr
-        td this
+        th Date
+        th Amount
+        th Category
+        th Status
+      each transactions
+        tr
+          td #{formatTime}
+          td #{amount}
+          td #{categorization}
+          td
+            if isPending
+              | Pending
+            else
+              | Approved

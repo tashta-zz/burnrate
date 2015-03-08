@@ -1,3 +1,5 @@
+Session.setDefault('activeAccount', 'all-accounts');
+
 Template.accounts.events({
   'click .js-account': function(e, t){
     var activeAccount = $(e.currentTarget).val();
@@ -21,9 +23,13 @@ Template.accounts.helpers({
 
   isTypeSelected: function(){
     return String(this) === Session.get('activeAccount');
+  },
+
+  displayName: function(){
+    if (String(this) === 'all-accounts'){
+      return 'All Accounts';
+    } else {
+      return String(this);
+    }
   }
 });
-
-Template.accounts.created = function(){
-  Session.set('activeAccount', 'all-accounts');
-}
