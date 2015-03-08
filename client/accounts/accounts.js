@@ -1,3 +1,5 @@
+Session.setDefault('activeAccount', 'all-accounts');
+
 Template.accounts.events({
   'click .js-account': function(e, t){
     var activeAccount = $(e.currentTarget).val();

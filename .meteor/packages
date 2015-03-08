@@ -10,7 +10,6 @@ insecure
 http
 mquandalle:jade
 momentjs:moment
-ewall:foundation
 d3js:d3
 peernohell:c3
 erasaur:meteor-lodash

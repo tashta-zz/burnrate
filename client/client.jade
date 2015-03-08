@@ -2,14 +2,11 @@ head
   title burnrate
 
 body
-  +accounts
-  +graph(graph_id="past_graph")
-  +graph(graph_id="future_graph")
-  +transactions
-
-template(name="topbar")
-  nav.top-bar.sticky
-    .title-area
-    li.name 
-      h1
-        a(href="#") What If?
+  if currentuser
+    +navbar
+    +accounts
+    +graph(graph_id="past_graph")
+    +graph(graph_id="future_graph")
+    +transactions
+  else
+    +login
