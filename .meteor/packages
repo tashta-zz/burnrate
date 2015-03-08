@@ -14,3 +14,5 @@ ewall:foundation
 d3js:d3
 peernohell:c3
 erasaur:meteor-lodash
+accounts-ui
+accounts-password
