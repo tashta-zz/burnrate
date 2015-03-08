@@ -1,22 +1,19 @@
-Template.graph.events({
-
-});
-
 Template.graph.rendered = function(){
   var self = this;
 
   function showTransactions(d){
-    // Find the matching data by date and account selection
-    // Display in transaction template
-    console.log(d);
+    //d.x because x is the date object
+    Session.set('transactionDate', d.x)
   }
 
-  Meteor.call('txs',null, null, 'struggling', function(err) {
+  Meteor.call('txs',null, null, 'comfortable', function(err) {
     if(err){
       console.log(err);
       return;
     }
+
     var data;
+
     if(self.data.graph_id == "past_graph"){
       data = getDayRange(null, new Date());
     }else{
@@ -29,7 +26,7 @@ Template.graph.rendered = function(){
     var graph_config = {
       bindto: "#"+self.data.graph_id,
       data: {
-        onmouseover: showTransactions,
+        onclick: showTransactions,
         x: 'date',
         columns: data['all-accounts'],
         types:{
