@@ -79,7 +79,7 @@ Meteor.methods({ txs: function(email, password, mock) {
       }
 
       // Update the collection
-      txs.remove();
+      txs.remove({});
       for (var day in days) { txs.insert(days[day]); }
 
       cb(null);
