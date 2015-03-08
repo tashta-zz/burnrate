@@ -51,13 +51,12 @@ Meteor.methods({ txs: function(email, password, mock) {
         var type = amount > 0 ? 'credit' : 'debit';
         var account = accountMap[tx['account-id']];
         var day = getDay(tx);
-        amount = Math.abs(amount);
 
         day['all-accounts'].txs.push(tx);
         day['all-accounts'].balance = totalBalance += amount;
         day['all-accounts'][type] += amount;
         day[account.name].balance = account.balance += amount;
-        day[account.name][type] += amount;
+        day[account.name][type] += Math.abs(amount);
       } 
       function getDay(tx) {
         // TODO: Calculate day from client's timezone
