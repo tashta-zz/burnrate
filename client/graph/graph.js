@@ -9,7 +9,10 @@ Template.graph.rendered = function(){
     }
     // Hard coded in a mock account here
     // Should replace with username and password ideally
-    Meteor.call('txs',null, null, 'struggling', function(err) {
+    console.log(Meteor.user().profile.levelType);
+    // FIXME: The reason loading takes so long is because this is called every time;
+    // It only needs to be called when the user is changed
+    Meteor.call('txs',null, null, Meteor.user().profile.levelType, function(err) {
       if(err){
         console.log(err);
         return;
