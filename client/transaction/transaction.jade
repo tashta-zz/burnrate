@@ -3,13 +3,13 @@ template(name="transactions")
     table#transactions-table
       tr
         th Date
-        th Amount
+        th Amount, $
         th Category
         th Status
       each transactions
         tr
           td #{formatTime}
-          td #{amount}
+          td #{dollarAmount}
           td #{categorization}
           td
             if isPending

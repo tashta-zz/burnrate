@@ -16,6 +16,10 @@ Template.transactions.helpers({
     return moment(this['transaction-time']).format('MMMM Do YYYY, h:mm:ss a');
   },
 
+  dollarAmount: function(){
+    return this.amount/10000;
+  },
+
   isPending: function(){
     return this['is-pending'];
   }
