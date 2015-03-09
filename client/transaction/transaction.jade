@@ -3,12 +3,14 @@ template(name="transactions")
     table#transactions-table
       tr
         th Date
+        th Merchant
         th Amount, $
         th Category
         th Status
       each transactions
         tr
           td #{formatTime}
+          td #{merchant}
           td #{dollarAmount}
           td #{categorization}
           td
